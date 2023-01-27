@@ -54,3 +54,30 @@ single source of source
     => createContext => createAContextWithDefaultValues
     => Provider => provide this data to component
     => useContext() => consume the operation 
+
+class component
+    mounting  
+        initialized ===>constructor
+        render() => all JSX Code => runs when the states changes
+        componentDidMount => run on 1st time render() executes
+        
+
+    updating
+        componentDidUpdate
+
+    unmounting (removed)
+        componentWillUnmount
+
+functional component 
+    useEffect => where ever there a side effect in state useEffect runs
+     mounting  
+        initialized ===> js code
+        return 
+        useEffect(cb=> , []) => hook  // [states] dependency array 
+        
+
+    updating
+        useEffect() => with a list or without
+
+    unmounting (removed)
+        return function in useEffect

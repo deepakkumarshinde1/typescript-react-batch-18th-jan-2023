@@ -8,9 +8,33 @@ interface CounterState {
 }
 
 class CounterClass extends React.Component<CounterProps, CounterState> {
-  state: CounterState = {
-    count: this.props.start,
+  constructor(props: CounterProps) {
+    super(props);
+    console.log("constructor");
+    this.state = { count: 0 };
+  }
+
+  static getDerivedStateFromProps = (
+    props: CounterProps,
+    state: CounterState
+  ): CounterState => {
+    console.log("getDerivedStateFromProps");
+    return {
+      ...state,
+      count: props.start,
+    };
   };
+
+  componentDidMount(): void {
+    console.log("componentDidMount");
+  }
+  componentDidUpdate(): void {
+    console.log("componentDidUpdate");
+  }
+
+  componentWillUnmount(): void {
+    console.log("componentWillUnmount");
+  }
   incCount = () => {
     // this.setState({ count: ++this.state.count });
     this.setState((state) => ({
@@ -23,8 +47,10 @@ class CounterClass extends React.Component<CounterProps, CounterState> {
     }));
   };
   render() {
+    console.log("render");
     return (
       <center>
+        <h1>I am class component</h1>
         <h1>{this.state.count}</h1>
         <button onClick={this.incCount}>Inc Count</button>
         <button onClick={this.decCount}>Dec Count</button>

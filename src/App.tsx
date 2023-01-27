@@ -7,6 +7,7 @@
 
 import { FC, useState } from "react";
 import Counter from "./components/Counter";
+import CounterClass from "./components/CounterClass";
 import { useCounterContext } from "./context/CounterContext";
 
 // Hooks in react => inbuilt methods to perform a complex task for react
@@ -21,11 +22,18 @@ import { useCounterContext } from "./context/CounterContext";
 
 const App: FC = () => {
   let { counters } = useCounterContext();
+  const [toggle, setToggle] = useState<boolean>(true);
   return (
     <center>
-      {counters.map((counter: number, index: number) => {
-        return <Counter key={index} start={counter} index={index} />;
-      })}
+      <hr />
+      <button onClick={() => setToggle(!toggle)}>Toggle components</button>
+      {toggle ? (
+        counters.map((counter: number, index: number) => {
+          return <Counter key={index} start={counter} index={index} />;
+        })
+      ) : (
+        <CounterClass start={10} />
+      )}
     </center>
   );
 };

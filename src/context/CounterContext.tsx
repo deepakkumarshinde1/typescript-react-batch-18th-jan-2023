@@ -5,9 +5,11 @@ type contextType = {
   counters: number[];
   incCount?(index: number): void;
   decCount?(index: number): void;
+  sSate: number;
 };
 let CounterContext = createContext<contextType>({
   counters: [],
+  sSate: 1,
 });
 
 // create provider component
@@ -16,11 +18,12 @@ type Props = {
 };
 export const CounterContextProvider = (props: Props) => {
   let { children } = props;
-  let [counters, setCounters] = useState<number[]>([2, 5, 0]);
-
+  let [counters, setCounters] = useState<number[]>([1]);
+  let [sSate, setsSate] = useState<number>(1);
   let incCount = (index: number): void => {
     counters[index] += 1;
     setCounters([...counters]);
+    setsSate(sSate * 2);
   };
 
   let decCount = (index: number): void => {
@@ -32,6 +35,7 @@ export const CounterContextProvider = (props: Props) => {
     counters,
     incCount,
     decCount,
+    sSate,
   };
   return (
     <CounterContext.Provider value={value}>{children}</CounterContext.Provider>
