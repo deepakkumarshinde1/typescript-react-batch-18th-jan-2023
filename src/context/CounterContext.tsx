@@ -16,7 +16,7 @@ type Props = {
 };
 export const CounterContextProvider = (props: Props) => {
   let { children } = props;
-  let [counters, setCounters] = useState<number[]>([2, 5, 10]);
+  let [counters, setCounters] = useState<number[]>([2, 5, 0]);
 
   let incCount = (index: number): void => {
     counters[index] += 1;

@@ -9,15 +9,20 @@ interface CounterProps {
 const Counter = (props: CounterProps) => {
   let { start, index } = props;
   let { incCount, decCount } = useCounterContext();
-
   return (
     <center>
-      <h1>{start}</h1>
-      <button onClick={() => (incCount === undefined ? null : incCount(index))}>
-        Inc Count
+      <h1 className={start % 2 === 0 ? "text-green" : "text-red"}>{start}</h1>
+      <button
+        className="btn btn-inc"
+        onClick={() => (incCount === undefined ? null : incCount(index))}
+      >
+        <i className="fa fa-plus-circle" aria-hidden="true"></i>
       </button>
-      <button onClick={() => (decCount === undefined ? null : decCount(index))}>
-        Dec Count
+      <button
+        className="btn btn-dec"
+        onClick={() => (decCount === undefined ? null : decCount(index))}
+      >
+        <i className="fa fa-minus-circle" aria-hidden="true"></i>
       </button>
     </center>
   );
