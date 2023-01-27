@@ -1,0 +1,56 @@
+npm => node package manager => install update remove
+npx => Node Package Executor => runtime ... install => run => remove
+
+npx create-react-app appName --template typescript
+
+react => main functionality
+react-dom => 
+react-scripts => dev stack, built prod, 
+cra-template-typescript
+
+
+develop an application with min or no configuration
+javascript or typescript
+use a component (main building block )
+send form parent to child (one way data binding )
+version upgrade => 17 , 18 => easy
+in react we can simply integrate multiple lib
+
+react => V-DOM =========> DOM
+
+
+we will not use document object
+
+basic of react
+component
+create a component (function)
+class component 
+hooks => state
+props
+single source of truth
+react life cycle hooks (useEffect)
+forms (useRef)
+useContext
+
+multi pages
+api
+localStorage
+
+main entry file is index.tsx
+JSX => javascript XML
+JSX Expression => { variable or run function}
+syntactic event =>  
+
+state 
+    => stores a data on component 
+    => states are readable and writable
+props 
+    => send data from parent to child
+    => states are only readable 
+
+single source of source
+ => pass all operational to child
+ => context API
+    => createContext => createAContextWithDefaultValues
+    => Provider => provide this data to component
+    => useContext() => consume the operation 
