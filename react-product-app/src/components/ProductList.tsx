@@ -1,7 +1,9 @@
 import { useProductContext } from "../context/ProductContext";
+import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
-  let { productList } = useProductContext();
+  let navigate = useNavigate();
+  let { productList, removeProduct, cloneProduct } = useProductContext();
   return (
     <>
       <section className="col-12 mt-2">
@@ -34,16 +36,22 @@ const ProductList = () => {
                     <button
                       className="btn btn-sm btn-danger mx-1"
                       title="delete"
+                      onClick={() => removeProduct(index)}
                     >
                       <i className="fa fa-trash" aria-hidden="true"></i>
                     </button>
                     <button
                       className="btn btn-sm btn-primary mx-1"
                       title="edit"
+                      onClick={() => navigate("/product/edit/" + product.id)}
                     >
                       <i className="fa fa-edit" aria-hidden="true"></i>
                     </button>
-                    <button className="btn btn-sm btn-dark mx-1" title="clone">
+                    <button
+                      className="btn btn-sm btn-dark mx-1"
+                      title="clone"
+                      onClick={() => cloneProduct(index)}
+                    >
                       <i className="fa fa-clone" aria-hidden="true"></i>
                     </button>
                   </td>

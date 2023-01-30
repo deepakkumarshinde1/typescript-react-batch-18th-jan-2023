@@ -16,3 +16,8 @@ code {
 .capitalize option {
   text-transform: capitalize;
 }
+
+.n-active {
+  color: red !important;
+  font-weight: bold;
+}

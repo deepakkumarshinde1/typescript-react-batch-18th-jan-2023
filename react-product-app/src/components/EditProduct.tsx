@@ -1,11 +1,20 @@
 import { useProductContext } from "../context/ProductContext";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 const AddProduct = () => {
-  let { changeInput, saveProduct, newProduct } = useProductContext();
+  let { changeInput, updateProduct, newProduct, setEditData } =
+    useProductContext();
+  let { id } = useParams();
+
+  useEffect(() => {
+    if (setEditData) setEditData(Number(id));
+  }, []);
+
   return (
     <>
       <section className="card col-6 col-lg-4 p-4 mt-3">
-        <h1>Add New Product </h1>
-        <form action="#" onSubmit={saveProduct ? saveProduct : () => {}}>
+        <h1>Edit Product </h1>
+        <form action="#" onSubmit={updateProduct ? updateProduct : () => {}}>
           <div className="mt-2">
             <label htmlFor="" className="form-label">
               Name
@@ -64,9 +73,9 @@ const AddProduct = () => {
             </select>
           </div>
 
-          <button className="mt-2 btn btn-outline-success">
+          <button className="mt-2 btn btn-outline-primary">
             <span className="fa fa-floppy-o me-2 "></span>
-            Submit
+            Update
           </button>
         </form>
       </section>
