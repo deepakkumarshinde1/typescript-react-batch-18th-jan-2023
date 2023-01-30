@@ -12,3 +12,19 @@
 // getItem => read
 // setItem => update
 // removeItem || clear => delete
+
+
+inbuilt components & hooks 
+    BrowserRouter
+    Router
+    Routes
+    Link
+    Outlet
+    Navigation
+
+    useNavigate
+    useParams
+    useParamsString
+    
+handles browser history
+create single page application approach
