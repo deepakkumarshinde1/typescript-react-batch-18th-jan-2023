@@ -1,39 +1,39 @@
-// functional component
-// handel data of component we need to use state
-// function don't have a state
-// stateless function
-// class component === before ===> 16.8 == from ===> Hooks in react
-// to provide same behaviors like class
-
-import { FC, useState } from "react";
-import Counter from "./components/Counter";
-import CounterClass from "./components/CounterClass";
-import { useCounterContext } from "./context/CounterContext";
-
-// Hooks in react => inbuilt methods to perform a complex task for react
-// 3rd party hooks
-// Custom Hooks
-// "use" in-front  any inbuilt method
-
-// state => useState()
-
-// array.map()
-// Array.isArray()
+import { FC, useCallback, useMemo, useRef, useState } from "react";
+import Button from "./components/Button";
+import IncOne from "./components/IncOne";
+import Input, { InputRef } from "./components/Input";
 
 const App: FC = () => {
-  let { counters } = useCounterContext();
-  const [toggle, setToggle] = useState<boolean>(true);
+  let inputRef = useRef<InputRef>(null);
+  let [count, setCount] = useState<number>(0);
+  let [square, setSquare] = useState<number>(2);
+
+  let incCount = useCallback(() => {
+    setCount(++count);
+  }, [count]);
+
+  let squareNumber = useCallback(() => {
+    setSquare(square * square);
+  }, [square]);
+
+  let isEven = useMemo(() => {
+    console.log("hello");
+    return count % 2 === 0;
+  }, [count]);
+  console.log(inputRef);
   return (
     <center>
-      <hr />
-      <button onClick={() => setToggle(!toggle)}>Toggle components</button>
-      {toggle ? (
-        counters.map((counter: number, index: number) => {
-          return <Counter key={index} start={counter} index={index} />;
-        })
-      ) : (
-        <CounterClass start={10} />
-      )}
+      <h5>{isEven ? "Even" : "Odd"}</h5>
+      <div>
+        <IncOne value={count} use="increment"></IncOne>
+        <Button clickHandel={incCount}>Inc Counter</Button>
+      </div>
+      <div>
+        <IncOne value={square} use="square" />
+        <Button clickHandel={squareNumber}>Make a square</Button>
+      </div>
+      <Input ref={inputRef} />
+      <button onClick={() => inputRef.current?.focus()}>Focus</button>
     </center>
   );
 };
