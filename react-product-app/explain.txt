@@ -28,3 +28,9 @@ inbuilt components & hooks
     
 handles browser history
 create single page application approach
+
+
+state => false (api request not done yet) then make request => true
+
+
+application function  == interceptor ===  server response

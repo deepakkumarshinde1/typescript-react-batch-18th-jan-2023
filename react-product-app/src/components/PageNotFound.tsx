@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const PageNotFound = () => {
   return (
     <>
@@ -6,6 +8,7 @@ const PageNotFound = () => {
           404 Page Not Found
           <i className="ms-1 fa fa-frown-o" aria-hidden="true"></i>
         </h1>
+        <Link to="/">Go to Home</Link>
       </section>
     </>
   );

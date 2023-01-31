@@ -21,3 +21,12 @@ export const getProductFromStorage = (): product[] => {
   let product = localStorage.getItem("productList");
   return product ? JSON.parse(product) : [];
 };
+
+export const setLoadState = () => {
+  localStorage.setItem("isLoaded", "1");
+};
+
+export const getLoadState = (): number => {
+  let value = localStorage.getItem("isLoaded");
+  return value ? Number(value) : 0;
+};

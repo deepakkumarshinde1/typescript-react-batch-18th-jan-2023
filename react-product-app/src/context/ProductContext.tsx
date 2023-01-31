@@ -6,11 +6,15 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import {
+  getLoadState,
   getProductFromStorage,
   product,
+  setLoadState,
   updateProductToStorage,
 } from "../service/localStorage";
+import { getProductService } from "../service/productService";
 import { useNavigate } from "react-router-dom";
 
 let initProduct: product = {
@@ -31,6 +35,7 @@ type ProductContextProps = {
 };
 
 type pContext = {
+  isLoaded: number;
   productList: product[];
   newProduct: product;
   changeInput?(
@@ -43,6 +48,7 @@ type pContext = {
   removeProduct(index: number): void;
   cloneProduct(index: number): void;
   setEditData?(id: number): void;
+  getProductList?(): void;
 };
 
 const ProductContext = createContext<pContext>({
@@ -50,10 +56,12 @@ const ProductContext = createContext<pContext>({
   newProduct: { ...initProduct },
   removeProduct: () => {},
   cloneProduct: () => {},
+  isLoaded: 0,
 });
 
 export const ProductContextProvider = ({ children }: ProductContextProps) => {
   let navigate = useNavigate();
+  let [isLoaded, setIsLoaded] = useState<number>(getLoadState());
   let [newProduct, saveNewProduct] = useState<product>({ ...initProduct });
   let [productList, setProductList] = useState<product[]>(
     getProductFromStorage()
@@ -110,6 +118,16 @@ export const ProductContextProvider = ({ children }: ProductContextProps) => {
       saveNewProduct({ ...result });
     }
   };
+  let getProductList = async () => {
+    let [status, result, message] = await getProductService();
+    if (status) {
+      setProductList([...productList, ...result]);
+      setLoadState();
+      setIsLoaded(1);
+    } else {
+      alert(message);
+    }
+  };
   let values: pContext = {
     productList,
     changeInput,
@@ -119,6 +137,8 @@ export const ProductContextProvider = ({ children }: ProductContextProps) => {
     cloneProduct,
     updateProduct,
     setEditData,
+    getProductList,
+    isLoaded,
   };
   return (
     <ProductContext.Provider value={values}>{children}</ProductContext.Provider>

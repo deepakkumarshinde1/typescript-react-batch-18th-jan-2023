@@ -1,6 +1,8 @@
 import { NavLink, Link } from "react-router-dom";
+import { useUserContext } from "../context/UserContext";
 
 const NavBar = () => {
+  let { logout } = useUserContext();
   return (
     <>
       <header className="col-12">
@@ -50,7 +52,10 @@ const NavBar = () => {
                 </li>
               </ul>
               <form className="d-flex" role="search">
-                <button className="btn btn-outline-danger btn-sm">
+                <button
+                  className="btn btn-outline-danger btn-sm"
+                  onClick={logout}
+                >
                   <i className="fa fa-sign-out" aria-hidden="true"></i> Logout
                 </button>
               </form>

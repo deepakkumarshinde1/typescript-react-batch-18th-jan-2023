@@ -1,9 +1,17 @@
 import { useProductContext } from "../context/ProductContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const ProductList = () => {
   let navigate = useNavigate();
-  let { productList, removeProduct, cloneProduct } = useProductContext();
+  let { productList, removeProduct, cloneProduct, getProductList, isLoaded } =
+    useProductContext();
+
+  useEffect(() => {
+    if (isLoaded === 0) {
+      if (getProductList) getProductList();
+    }
+  }, []);
   return (
     <>
       <section className="col-12 mt-2">
